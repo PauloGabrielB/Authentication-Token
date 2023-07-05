@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="container mx-auto">
+
+        <h1 class="mb-4 text-3xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl"><span
+                class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Tok</span> <span
+                class="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">Estoque.</span>
+        </h1>
+        <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">Aproveite enquanto <span
+                class="italic">ainda</span> temos estoque 😏.</p>
+
+        <form class="mt-6">
+            <div class="mb-6">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nome</label>
+                <input type="text" id="name"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Samsung Galaxy S20" required>
+            </div>
+            <div class="mb-6">
+                <label for="color" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Cor</label>
+                <input type="text" id="color"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Azul" required>
+            </div>
+            <div class="mb-6">
+                <label for="amount"
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Quantidade</label>
+                <input type="number" id="amount"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="1" required>
+            </div>
+            <div class="mb-6">
+                <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Preço</label>
+                <input type="number" id="price" step="0.01"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="0,01" required>
+            </div>
+            <button type="submit"
+                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Salvar</button>
+        </form>
+
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-6">
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Nome do produto
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Cor
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Quantidade
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Preço
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Apple MacBook Pro 17"
+                        </th>
+                        <td class="px-6 py-4">
+                            Prata
+                        </td>
+                        <td class="px-6 py-4">
+                            1
+                        </td>
+                        <td class="px-6 py-4">
+                            R$ 2999,00
+                        </td>
+                    </tr>
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Microsoft Surface Pro
+                        </th>
+                        <td class="px-6 py-4">
+                            Branco
+                        </td>
+                        <td class="px-6 py-4">
+                            5
+                        </td>
+                        <td class="px-6 py-4">
+                            R$ 1999,00
+                        </td>
+                    </tr>
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Magic Mouse 2
+                        </th>
+                        <td class="px-6 py-4">
+                            Preto
+                        </td>
+                        <td class="px-6 py-4">
+                            2
+                        </td>
+                        <td class="px-6 py-4">
+                            R$ 99,00
+                        </td>
+                    </tr>
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Google Pixel Phone
+                        </th>
+                        <td class="px-6 py-4">
+                            Cinza
+                        </td>
+                        <td class="px-6 py-4">
+                            1
+                        </td>
+                        <td class="px-6 py-4">
+                            R$ 799,00
+                        </td>
+                    </tr>
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Apple Watch 5
+                        </th>
+                        <td class="px-6 py-4">
+                            Vermelho
+                        </td>
+                        <td class="px-6 py-4">
+                            3
+                        </td>
+                        <td class="px-6 py-4">
+                            R$ 999,00
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="font-semibold text-gray-900 dark:text-white">
+                        <th scope="row" class="px-6 py-3 text-base" colspan="2">Total</th>
+                        <td class="px-6 py-3">12</td>
+                        <td class="px-6 py-3">R$ 6895,00</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
