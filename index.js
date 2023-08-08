@@ -1,3 +1,25 @@
+// fetch('https://my-json-server.typicode.com/rtio/products-api-demo/products')
+//     .then((response) => {
+//         console.log(response.status);
+//         response.json()
+//     })
+//     .then((data) => {
+//         console.log(data);
+//     })
+//     .catch(error => console.log('Oops erro!'));
+// console.log('Olá, mundo!');
+
+
+async function obterProdutos() {
+    const response = await fetch('https://my-json-server.typicode.com/rtio/products-api-demo/products');
+    const data = await response.json();
+    imprimirProdutos(data);
+    console.log(data);
+    return data;
+}
+
+obterProdutos();
+
 const meusProdutos = [
     {
         id: 1,
@@ -54,7 +76,7 @@ const cabecalho = [
 
 function criarCabecalho(){
     const thead = document.createElement('thead');
-    thead.classList.add('text-xs', 'text-gray-700', 'uppercase', 'bg-gray-50', 'dark:bg-gray-700', 'dark:text-gray-400');
+    thead.classList.add('text-xs', 'text-gray-700', 'uppercase', 'bg-gray-50');
     
     const trHead = document.createElement('tr');
 
@@ -73,7 +95,7 @@ function criarCabecalho(){
 function criarRodape(produtos){
     const tfoot = document.createElement('tfoot');
     const trRodape = document.createElement('tr');
-    trRodape.classList.add('font-semibold', 'text-gray-900', 'dark:text-white');
+    trRodape.classList.add('font-semibold', 'text-gray-900');
 
     const thTotal = document.createElement('th');
     thTotal.setAttribute('colspan', '3');
@@ -100,7 +122,7 @@ function criarRodape(produtos){
 function imprimirProdutos(products){
     const table = document.querySelector('#tabela-produtos');
     table.innerHTML = '';
-    table.classList.add('w-full', 'text-sm', 'text-left', 'text-gray-500', 'dark:text-gray-400');
+    table.classList.add('w-full', 'text-sm', 'text-left', 'text-gray-500');
 
     const thead = criarCabecalho();
     table.appendChild(thead);
@@ -108,13 +130,13 @@ function imprimirProdutos(products){
     const tbody = document.createElement('tbody');
     products.forEach((product) => {
         const tr = document.createElement('tr');
-        tr.classList.add('bg-white', 'border-b', 'dark:bg-gray-800', 'dark:border-gray-700', 'hover:bg-gray-50', 'dark:hover:bg-gray-600');
+        tr.classList.add('bg-white', 'border-b', 'hover:bg-gray-50');
         for (const key in product) {
             let coluna = document.createElement('td');
             coluna.classList.add('px-6', 'py-4');
             if (key === 'name') {
                 coluna = document.createElement('th');
-                coluna.classList.add('px-6', 'py-4', 'font-medium', 'text-gray-900', 'whitespace-nowrap', 'dark:text-white');
+                coluna.classList.add('px-6', 'py-4', 'font-medium', 'text-gray-900', 'whitespace-nowrap');
                 coluna.setAttribute('scope', 'row');
             }
             const valor = product[key];
@@ -130,7 +152,7 @@ function imprimirProdutos(products){
         
         const linkEditar = document.createElement('a');
         linkEditar.setAttribute('href', '#');
-        linkEditar.classList.add('font-medium', 'text-red-600', 'dark:text-red-500', 'hover:underline');
+        linkEditar.classList.add('font-medium', 'text-red-600', 'hover:underline');
         linkEditar.textContent = 'Excluir';
         linkEditar.addEventListener('click', (event) => {
             event.preventDefault();
@@ -152,7 +174,7 @@ function imprimirProdutos(products){
     table.appendChild(tbody);
 }
 
-imprimirProdutos(meusProdutos);
+// imprimirProdutos(meusProdutos);
 
 function obterFormData(){
     const inputNome = document.querySelector('#name');
