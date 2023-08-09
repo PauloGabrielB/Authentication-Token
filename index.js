@@ -1,69 +1,10 @@
-// fetch('https://my-json-server.typicode.com/rtio/products-api-demo/products')
-//     .then((response) => {
-//         console.log(response.status);
-//         response.json()
-//     })
-//     .then((data) => {
-//         console.log(data);
-//     })
-//     .catch(error => console.log('Oops erro!'));
-// console.log('Olá, mundo!');
-
+const API = 'https://products-api-i6m5.onrender.com';
 
 async function obterProdutos() {
-    const response = await fetch('https://my-json-server.typicode.com/rtio/products-api-demo/products');
+    const response = await fetch(`${API}/products`);
     const data = await response.json();
-    imprimirProdutos(data);
-    console.log(data);
     return data;
 }
-
-obterProdutos();
-
-const meusProdutos = [
-    {
-        id: 1,
-        name: 'Apple MacBook Pro 17"',
-        color: 'Prata',
-        amount: 1,
-        price: 2999,
-    },
-    {
-        id: 2,
-        name: 'Microsoft Surface Pro',
-        color: 'Branco',
-        amount: 5,
-        price: 1999,
-    },
-    {
-        id: 3,
-        name: 'Magic Mouse 2',
-        color: 'Preto',
-        amount: 2,
-        price: 99,
-    },
-    {
-        id: 4,
-        name: 'Google Pixel Phone',
-        color: 'Cinza',
-        amount: 2,
-        price: 799,
-    },
-    {
-        id: 5,
-        name: 'Apple Watch 5',
-        color: 'Vermelho',
-        amount: 3,
-        price: 999,
-    },
-    {
-        id: 6,
-        name: 'Apple iPad Pro 10.5"',
-        color: 'Dourado',
-        amount: 1,
-        price: 599,
-    },
-];
 
 const cabecalho = [
     'id',
@@ -150,17 +91,18 @@ function imprimirProdutos(products){
         const tdAcoes = document.createElement('td');
         tdAcoes.classList.add('flex', 'items-center', 'px-6', 'py-4', 'space-x-3');
         
-        const linkEditar = document.createElement('a');
-        linkEditar.setAttribute('href', '#');
-        linkEditar.classList.add('font-medium', 'text-red-600', 'hover:underline');
-        linkEditar.textContent = 'Excluir';
-        linkEditar.addEventListener('click', (event) => {
+        const linkRemover = document.createElement('a');
+        linkRemover.setAttribute('href', '#');
+        linkRemover.classList.add('font-medium', 'text-red-600', 'hover:underline');
+        linkRemover.textContent = 'Excluir';
+        linkRemover.addEventListener('click', async (event) => {
             event.preventDefault();
-            const novaLista = excluirProduto(product.id);
-            imprimirProdutos(novaLista);
+            await excluirProduto(product.id);
+            const novosProdutos = await obterProdutos();
+            imprimirProdutos(novosProdutos);
         });
 
-        tdAcoes.appendChild(linkEditar);
+        tdAcoes.appendChild(linkRemover);
 
         tr.appendChild(tdAcoes);
          
@@ -173,8 +115,6 @@ function imprimirProdutos(products){
 
     table.appendChild(tbody);
 }
-
-// imprimirProdutos(meusProdutos);
 
 function obterFormData(){
     const inputNome = document.querySelector('#name');
@@ -194,18 +134,27 @@ function obterFormData(){
     };
 };
 
-function adicionarProduto(event){
+async function adicionarProduto(event){
     event.preventDefault();
     const produto = obterFormData();
-    produto.id = meusProdutos.length + 1;
-    meusProdutos.push(produto);
+    const response = await fetch(`${API}/products`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(produto)
+    });
+    if (response.status !== 201) {
+        console.error('Erro ao adicionar produto');
+        return;
+    }
+    const meusProdutos = await obterProdutos();
     imprimirProdutos(meusProdutos);
 }
 
-function excluirProduto(id){
-    const produtoIndice = meusProdutos.findIndex((produto) => produto.id === id);
-    meusProdutos.splice(produtoIndice, 1);
-    return meusProdutos;
+async function excluirProduto(id){
+    const response = await fetch(`${API}/products/${id}`, { method: 'DELETE' });
+    if (response.status !== 204) {
+        console.error('Erro ao excluir produto');
+    }
 }
 
 function registrarListeners(){
@@ -213,4 +162,10 @@ function registrarListeners(){
     form.addEventListener('submit', adicionarProduto);
 }
 
-registrarListeners();
+async function init(){
+    registrarListeners();
+    const produtos = await obterProdutos();
+    imprimirProdutos(produtos);
+}
+
+init();
