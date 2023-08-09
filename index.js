@@ -102,6 +102,17 @@ function imprimirProdutos(products){
             imprimirProdutos(novosProdutos);
         });
 
+        const linkEditar = document.createElement('a');
+        linkEditar.setAttribute('href', '#');
+        linkEditar.classList.add('font-medium', 'text-blue-600', 'hover:underline');
+        linkEditar.textContent = 'Editar';
+        linkEditar.addEventListener('click', async (event) => {
+            event.preventDefault();
+            preencherForm(product);
+            // capturar o produto para edição
+        });
+
+        tdAcoes.appendChild(linkEditar);
         tdAcoes.appendChild(linkRemover);
 
         tr.appendChild(tdAcoes);
@@ -115,6 +126,18 @@ function imprimirProdutos(products){
 
     table.appendChild(tbody);
 }
+
+function preencherForm(produto){
+    const inputNome = document.querySelector('#name');
+    const inputCor = document.querySelector('#color');
+    const inputQuantidade = document.querySelector('#amount');
+    const inputPreco = document.querySelector('#price');
+
+    inputNome.value = produto.name;
+    inputCor.value = produto.color;
+    inputQuantidade.value = produto.amount;
+    inputPreco.value = produto.price;
+};
 
 function obterFormData(){
     const inputNome = document.querySelector('#name');
@@ -134,9 +157,15 @@ function obterFormData(){
     };
 };
 
-async function adicionarProduto(event){
+async function salvarProduto(event){
     event.preventDefault();
     const produto = obterFormData();
+    // identificar se é um produto novo ou edição
+    // const resp = await fetch(`${API}/products/${id}`, {
+    //     method: 'PUT',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify(produto)
+    // });
     const response = await fetch(`${API}/products`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -159,7 +188,7 @@ async function excluirProduto(id){
 
 function registrarListeners(){
     const form = document.querySelector('#form-produto');
-    form.addEventListener('submit', adicionarProduto);
+    form.addEventListener('submit', salvarProduto);
 }
 
 async function init(){
